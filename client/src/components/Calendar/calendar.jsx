@@ -31,21 +31,24 @@ const MyCalendarTasks = () => {
     }
   }, [loading, data]);
 
-  console.log(data)
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error fetching data...</p>;
 
   const customLocalizer = momentLocalizer(moment);
 
   return (
-    <div style={{ height: 500 }}>
+    <div style={{ height: '100vh', width: '100%' }}>
       <Calendar
         events={events}
         startAccessor="start"
         endAccessor="end"
         localizer={customLocalizer}
-        style={{ margin: '50px' }}
+        style={{ minHeight: '400px', height: '100%', width: '100%' }}
+        eventPropGetter={() => ({
+          style: {
+            height: '100%' // Ensure each event block has full height
+          }
+        })}
       />
     </div>
   );
